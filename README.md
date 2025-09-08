@@ -1,13 +1,13 @@
-## Career Co-Pilot
+## JOB-Verse
 
-![Career Co-Pilot Demo]
+![JOB-Verse Demo]
 
 **Description:**  
-🚀 Career Co-Pilot
+🚀 JOB-Verse
 
-Career Co-Pilot is an AI-powered personalized learning pathway generator that helps students and professionals bridge the gap between classroom education and industry readiness.
+JOB-Verse is an AI-powered personalized learning pathway generator that helps students and professionals bridge the gap between classroom education and industry readiness.
 
-Built with ML-driven Knowledge Graphs, an immersive job simulator, and AI mentorship, Career Co-Pilot adapts learning journeys to each individual’s age, interests, skill level, and career aspirations.
+Built with ML-driven Knowledge Graphs, an immersive job simulator, and AI mentorship,JOB-Verse adapts learning journeys to each individual’s age, interests, skill level, and career aspirations.
 
 🌟 Key Features
 
@@ -45,6 +45,6 @@ AI Mentorship: Chatbot (LLM-powered)
 
 🚀 Vision
 
-Career Co-Pilot aims to redefine e-learning by making it personalized, adaptive, and career-driven, preparing the next generation for the workforce of tomorrow.
+JOB-Verse aims to redefine e-learning by making it personalized, adaptive, and career-driven, preparing the next generation for the workforce of tomorrow.
 
 ---
