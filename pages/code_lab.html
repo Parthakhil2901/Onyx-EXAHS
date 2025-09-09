@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Lab - JOB Verse</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-dark: #00ffd5;
+        --secondary-dark: #6c2bd9;
+        --bg-dark: #0a0b1a;
+        --card-dark: #151628;
+        --text-dark: #ffffff;
+        --border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .code-lab-header {
+        background: var(--card-dark);
+        padding: 1rem 2rem 0.5rem 2rem;
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .code-lab-header h1 {
+        background: linear-gradient(
+          45deg,
+          var(--primary-dark),
+          var(--secondary-dark)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .code-lab-description {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto 1rem auto;
+        line-height: 1.6;
+        max-height: 3.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .code-lab-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem 2rem 2rem 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .monaco-editor-wrapper {
+        background: var(--card-dark);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-dark),
+          var(--secondary-dark)
+        );
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 1001;
+        transition: transform 0.2s;
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .back-button:hover {
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 768px) {
+        .code-lab-container {
+          padding: 1rem;
+        }
+
+        .code-lab-header {
+          padding: 1rem;
+        }
+
+        .code-lab-header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      class="back-button"
+      onclick="window.location.href='/pages/dashboard.html'"
+    >
+      <i class="fas fa-arrow-left"></i>
+      Back to Dashboard
+    </button>
+
+    <header class="code-lab-header">
+      <h1><i class="fas fa-code"></i> Code Lab</h1>
+      <p class="code-lab-description">
+        Practice coding problems with our integrated Monaco code editor. Choose
+        from various programming languages and test your solutions against
+        multiple test cases.
+      </p>
+    </header>
+
+    <div class="code-lab-container">
+      <div id="monaco-editor-wrapper" class="monaco-editor-wrapper">
+        <!-- Monaco Editor will be initialized here -->
+      </div>
+    </div>
+
+    <!-- Monaco Editor Loader -->
+    <script src="https://unpkg.com/monaco-editor@0.52.0/min/vs/loader.min.js"></script>
+
+    <!-- Monaco Integration Script -->
+    <script src="../js/monaco-integration.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          // Initialize Monaco Code Lab
+          const codeLab = new MonacoCodeLab("monaco-editor-wrapper");
+          await codeLab.initialize();
+
+          console.log("Monaco Code Lab initialized successfully");
+        } catch (error) {
+          console.error("Failed to initialize Monaco Code Lab:", error);
+
+          // Fallback UI
+          const wrapper = document.getElementById("monaco-editor-wrapper");
+          if (wrapper) {
+            wrapper.innerHTML = `
+                        <div style="text-align: center; padding: 3rem; color: rgba(255, 255, 255, 0.7);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; color: #ff9800;"></i>
+                            <h3>Editor Loading Failed</h3>
+                            <p>Unable to load the Monaco code editor. Please check your internet connection and try again.</p>
+                            <button onclick="location.reload()" style="
+                                background: linear-gradient(45deg, #00ffd5, #6c2bd9);
+                                color: white;
+                                border: none;
+                                padding: 0.75rem 1.5rem;
+                                border-radius: 8px;
+                                cursor: pointer;
+                                margin-top: 1rem;
+                            ">
+                                <i class="fas fa-refresh"></i> Retry
+                            </button>
+                        </div>
+                    `;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

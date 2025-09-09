@@ -60,8 +60,25 @@ app.post("/api/gemini-chat", async (req, res) => {
   }
 });
 
-// Serve static files if needed (optional)
-// app.use(express.static('public'));
+// Serve static files from pages and public directories
+app.use(express.static(__dirname));
+
+// Route for root to serve index.html
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/pages/index.html");
+});
+
+// Route to serve dashboard.html
+app.get("/dashboard.html", (req, res) => {
+  res.sendFile(__dirname + "/pages/dashboard.html");
+});
+
+// Route to serve screening.html
+app.get("/screening", (req, res) => {
+  res.sendFile(__dirname + "/pages/screening.html");
+});
+
+// Add more routes as necessary for other pages
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

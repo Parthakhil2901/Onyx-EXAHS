@@ -1,175 +1,213 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize back button
-    let backBtn = document.getElementById('backButton');
-    if (backBtn) {
-        backBtn.style.display = 'none';
-        backBtn.addEventListener('click', () => window.history.back());
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize back button
+  let backBtn = document.getElementById("backButton");
+  if (backBtn) {
+    backBtn.style.display = "none";
+    backBtn.addEventListener("click", () => window.history.back());
+  }
 
-    // Add click handler to all Choose File buttons
-    document.querySelectorAll('.choose-file').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const fileInput = this.closest('.file-upload-container').querySelector('input[type="file"]');
-            fileInput.click();
-        });
+  // Add click handler to all Choose File buttons
+  document.querySelectorAll(".choose-file").forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      const fileInput = this.closest(".file-upload-container").querySelector(
+        'input[type="file"]'
+      );
+      fileInput.click();
+    });
+  });
+
+  // Add change handler to all file inputs
+  document
+    .querySelectorAll('.file-upload-container input[type="file"]')
+    .forEach((input) => {
+      input.addEventListener("change", function () {
+        const fileName = this.files[0]?.name;
+        if (fileName) {
+          const button = this.closest(".file-upload-container").querySelector(
+            ".choose-file"
+          );
+          button.textContent = fileName;
+        }
+      });
     });
 
-    // Add change handler to all file inputs
-    document.querySelectorAll('.file-upload-container input[type="file"]').forEach(input => {
-        input.addEventListener('change', function() {
-            const fileName = this.files[0]?.name;
-            if (fileName) {
-                const button = this.closest('.file-upload-container').querySelector('.choose-file');
-                button.textContent = fileName;
-            }
-        });
+  // Add click handler to sidebar toggle
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  const sidebar = document.querySelector(".sidebar");
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
     });
+  }
 
-    // Add click handler to sidebar toggle
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-        });
-    }
+  // Handle chat button clicks
+  const chatButtons = document.querySelectorAll(".chat-btn");
+  chatButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const buttonText = button.textContent.trim();
 
-    // Handle chat button clicks
-    const chatButtons = document.querySelectorAll('.chat-btn');
-    chatButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const buttonText = button.textContent.trim();
-            
-            if (buttonText === 'Chat with Mr. Raze') {
-                window.location.href = 'bossbot.html';
-            } else if (buttonText === 'Chat with Alex') {
-                window.location.href = 'juniordev-bot.html';
-            } else if (buttonText === 'Chat with Sarah') {
-                window.location.href = 'careerguide-bot.html';
-            }
-        });
+      if (buttonText === "Chat with Mr. Raze") {
+        window.location.href = "/pages/bossbot.html";
+      } else if (buttonText === "Chat with Alex") {
+        window.location.href = "/pages/juniordev-bot.html";
+      } else if (buttonText === "Chat with Sarah") {
+        window.location.href = "/pages/careerguide-bot.html";
+      }
     });
+  });
 
-    // Add click handlers to nav buttons
-    document.querySelectorAll('.nav-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            const sectionId = this.dataset.section;
+  // Add click handlers to nav buttons
+  document.querySelectorAll(".nav-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      document
+        .querySelectorAll(".nav-btn")
+        .forEach((btn) => btn.classList.remove("active"));
+      this.classList.add("active");
 
-            if (sectionId === 'tech-upskilling' || sectionId === 'soft-upskilling' || sectionId === 'switch-prep' || sectionId === 'colleagues' || sectionId === 'erp' || sectionId === 'job-finder' || sectionId === 'code-lab' || sectionId === 'network-shop' || sectionId === 'spin2solve' || sectionId === 'decision-lab' || sectionId === 'flashcards' || sectionId === 'career-twin' || sectionId === 'workflow-management') {
-                if (backBtn) {
-                    backBtn.style.display = 'flex';
-                }
-                
-                if (sectionId === 'tech-upskilling') {
-                    window.location.href = 'soft-skills.html';
-                } else if (sectionId === 'soft-upskilling') {
-                    window.location.href = 'task_management.html';
-                } else if (sectionId === 'switch-prep') {
-                    window.location.href = 'mock_interview.html';
-                } else if (sectionId === 'erp') {
-                    window.location.href = 'erp_timesheet.html';
-                } else if (sectionId === 'job-finder') {
-                    window.location.href = 'job_finder.html';
-                } else if (sectionId === 'code-lab') {
-                    window.location.href = 'code_editor.html';
-                } else if (sectionId === 'network-shop') {
-                    window.location.href = 'networking.html';
-                } else if (sectionId === 'spin2solve') {
-                    window.location.href = 'spin_the_wheel.html';
-                } else if (sectionId === 'decision-lab') {
-                    window.location.href = 'scenario_sim.html';
-                } else if (sectionId === 'flashcards') {
-                    window.location.href = 'flashcards.html';
-                } else if (sectionId === 'career-twin') {
-                    window.location.href = 'guidance.html';
-                } else if (sectionId === 'colleagues') {
-                    document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-                    document.getElementById(sectionId)?.classList.add('active');
-                    
-                    const sarahCard = document.querySelector('.colleague-card:nth-child(3)');
-                    if (sarahCard) {
-                        sarahCard.addEventListener('click', function(e) {
-                            if (!e.target.closest('.chat-btn')) {
-                                window.location.href = 'task_management.html';
-                            }
-                        });
-                    }
-                    return;
-                } else if (sectionId === 'workflow-management') {
-                    document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-                    document.getElementById(sectionId)?.classList.add('active');
-                    initializeWorkflowManagement();
-                    return;
-                }
-                return;
-            }
-            
-            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId)?.classList.add('active');
-            
-            if (backBtn) {
-                backBtn.style.display = 'none';
-            }
-        });
-    });
+      const sectionId = this.dataset.section;
 
-    // Initialize Firebase Auth listener
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            // Set up single listener for tasks
-            const tasksRef = firebase.firestore().collection('tasks')
-                .where('userId', '==', user.uid);
+      if (
+        sectionId === "tech-upskilling" ||
+        sectionId === "soft-upskilling" ||
+        sectionId === "switch-prep" ||
+        sectionId === "colleagues" ||
+        sectionId === "erp" ||
+        sectionId === "job-finder" ||
+        sectionId === "code-lab" ||
+        sectionId === "network-shop" ||
+        sectionId === "spin2solve" ||
+        sectionId === "decision-lab" ||
+        sectionId === "flashcards" ||
+        sectionId === "career-twin" ||
+        sectionId === "workflow-management"
+      ) {
+        if (backBtn) {
+          backBtn.style.display = "flex";
+        }
 
-            tasksRef.onSnapshot((snapshot) => {
-                updateTasksTable(snapshot);
-            }, (error) => {
-                console.error("Error listening to tasks:", error);
+        if (sectionId === "tech-upskilling") {
+          window.location.href = "/pages/soft-skills.html";
+        } else if (sectionId === "soft-upskilling") {
+          window.location.href = "/pages/task_management.html";
+        } else if (sectionId === "switch-prep") {
+          window.location.href = "/pages/mock_interview.html";
+        } else if (sectionId === "erp") {
+          window.location.href = "/pages/erp_timesheet.html";
+        } else if (sectionId === "job-finder") {
+          window.location.href = "/pages/job_finder.html";
+        } else if (sectionId === "code-lab") {
+          window.location.href = "/pages/code_lab.html";
+        } else if (sectionId === "network-shop") {
+          window.location.href = "/pages/networking.html";
+        } else if (sectionId === "spin2solve") {
+          window.location.href = "/pages/spin_the_wheel.html";
+        } else if (sectionId === "decision-lab") {
+          window.location.href = "/pages/scenario_sim.html";
+        } else if (sectionId === "flashcards") {
+          window.location.href = "/pages/flashcards.html";
+        } else if (sectionId === "career-twin") {
+          window.location.href = "/pages/guidance.html";
+        } else if (sectionId === "colleagues") {
+          document
+            .querySelectorAll(".content-section")
+            .forEach((section) => section.classList.remove("active"));
+          document.getElementById(sectionId)?.classList.add("active");
+
+          const sarahCard = document.querySelector(
+            ".colleague-card:nth-child(3)"
+          );
+          if (sarahCard) {
+            sarahCard.addEventListener("click", function (e) {
+              if (!e.target.closest(".chat-btn")) {
+                window.location.href = "/pages/task_management.html";
+              }
             });
+          }
+          return;
+        } else if (sectionId === "workflow-management") {
+          document
+            .querySelectorAll(".content-section")
+            .forEach((section) => section.classList.remove("active"));
+          document.getElementById(sectionId)?.classList.add("active");
+          initializeWorkflowManagement();
+          return;
         }
-    });
+        return;
+      }
 
-    // Handle starter file downloads
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('download-btn') && e.target.textContent === 'Download Starter File') {
-            downloadStarterFile();
-        }
+      document
+        .querySelectorAll(".content-section")
+        .forEach((section) => section.classList.remove("active"));
+      document.getElementById(sectionId)?.classList.add("active");
+
+      if (backBtn) {
+        backBtn.style.display = "none";
+      }
     });
+  });
+
+  // Initialize Firebase Auth listener
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      // Set up single listener for tasks
+      const tasksRef = firebase
+        .firestore()
+        .collection("tasks")
+        .where("userId", "==", user.uid);
+
+      tasksRef.onSnapshot(
+        (snapshot) => {
+          updateTasksTable(snapshot);
+        },
+        (error) => {
+          console.error("Error listening to tasks:", error);
+        }
+      );
+    }
+  });
+
+  // Handle starter file downloads
+  document.addEventListener("click", function (e) {
+    if (
+      e.target.classList.contains("download-btn") &&
+      e.target.textContent === "Download Starter File"
+    ) {
+      downloadStarterFile();
+    }
+  });
 });
 
 // Function to update tasks table
 function updateTasksTable(snapshot) {
-    const tasksTableBody = document.getElementById('tasksTableBody');
-    if (!tasksTableBody) return;
+  const tasksTableBody = document.getElementById("tasksTableBody");
+  if (!tasksTableBody) return;
 
-    // Keep track of existing tasks
-    const existingTasks = new Set();
-    
-    snapshot.forEach(doc => {
-        const task = doc.data();
-        const taskId = doc.id;
-        existingTasks.add(taskId);
+  // Keep track of existing tasks
+  const existingTasks = new Set();
 
-        let row = document.querySelector(`[data-task-id="${taskId}"]`);
-        
-        if (!row) {
-            // Create new row if it doesn't exist
-            row = document.createElement('tr');
-            row.setAttribute('data-task-id', taskId);
-            tasksTableBody.appendChild(row);
-        }
+  snapshot.forEach((doc) => {
+    const task = doc.data();
+    const taskId = doc.id;
+    existingTasks.add(taskId);
 
-        // Update row content
-        row.innerHTML = `
+    let row = document.querySelector(`[data-task-id="${taskId}"]`);
+
+    if (!row) {
+      // Create new row if it doesn't exist
+      row = document.createElement("tr");
+      row.setAttribute("data-task-id", taskId);
+      tasksTableBody.appendChild(row);
+    }
+
+    // Update row content
+    row.innerHTML = `
             <td><i class="fas ${getStatusIcon(task.status)}"></i></td>
             <td>${task.taskName}</td>
             <td>${task.description}</td>
             <td>${task.priority}</td>
-            <td>${task.timeEstimate || '2 hours'}</td>
+            <td>${task.timeEstimate || "2 hours"}</td>
             <td>${task.deadline}</td>
             <td>
                 <button class="download-btn">Download Starter File</button>
@@ -178,210 +216,219 @@ function updateTasksTable(snapshot) {
                 <div class="file-upload-container">
                     <input type="file" accept="*/*" />
                     <small>Max file size: 1MB</small>
-                    ${task.status === 'Completed' ? 
-                        `<button class="download-btn">Download File ✓</button>
+                    ${
+                      task.status === "Completed"
+                        ? `<button class="download-btn">Download File ✓</button>
                          <div class="status">✓ Task completed</div>
-                         <div class="status">Submitted</div>` :
-                        `<button class="choose-file">Choose File</button>`}
+                         <div class="status">Submitted</div>`
+                        : `<button class="choose-file">Choose File</button>`
+                    }
                 </div>
             </td>
         `;
-    });
+  });
 
-    // Remove rows for deleted tasks
-    const rows = tasksTableBody.getElementsByTagName('tr');
-    for (let i = rows.length - 1; i >= 0; i--) {
-        const row = rows[i];
-        const taskId = row.getAttribute('data-task-id');
-        if (taskId && !existingTasks.has(taskId)) {
-            row.remove();
-        }
+  // Remove rows for deleted tasks
+  const rows = tasksTableBody.getElementsByTagName("tr");
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const row = rows[i];
+    const taskId = row.getAttribute("data-task-id");
+    if (taskId && !existingTasks.has(taskId)) {
+      row.remove();
     }
+  }
 }
 
 // Helper function to get status icon
 function getStatusIcon(status) {
-    switch(status) {
-        case 'Completed':
-            return 'fa-check-circle';
-        case 'Pending':
-            return 'fa-clock';
-        case 'Failed':
-            return 'fa-times-circle';
-        default:
-            return 'fa-clock';
-    }
+  switch (status) {
+    case "Completed":
+      return "fa-check-circle";
+    case "Pending":
+      return "fa-clock";
+    case "Failed":
+      return "fa-times-circle";
+    default:
+      return "fa-clock";
+  }
 }
 
 // Function to download starter file
 async function downloadStarterFile() {
-    try {
-        // Read the faulty_ui_bug.html file
-        const response = await fetch('faulty_ui_bug.html');
-        const content = await response.text();
-        
-        // Create and trigger download
-        const blob = new Blob([content], { type: 'text/html' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'faulty_ui_bug.html';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-    } catch (error) {
-        console.error("Error downloading starter file:", error);
-    }
+  try {
+    // Read the faulty_ui_bug.html file
+    const response = await fetch("/pages/faulty_ui_bug.html");
+    const content = await response.text();
+
+    // Create and trigger download
+    const blob = new Blob([content], { type: "text/html" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "faulty_ui_bug.html";
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  } catch (error) {
+    console.error("Error downloading starter file:", error);
+  }
 }
 
 // Workflow Management Functions
 async function initializeWorkflowManagement() {
-    // Load workflow service if not already loaded
-    if (!window.workflowService) {
-        const script = document.createElement('script');
-        script.src = 'workflow-service.js';
-        document.head.appendChild(script);
-        
-        // Wait for script to load
-        await new Promise(resolve => {
-            script.onload = resolve;
-        });
-    }
-    
-    updateWorkflowStatus();
-    loadRecentJobs();
-    
-    // Set up periodic status updates
-    setInterval(updateWorkflowStatus, 10000); // Update every 10 seconds
+  // Load workflow service if not already loaded
+  if (!window.workflowService) {
+    const script = document.createElement("script");
+    script.src = "/js/workflow-service.js";
+    document.head.appendChild(script);
+
+    // Wait for script to load
+    await new Promise((resolve) => {
+      script.onload = resolve;
+    });
+  }
+
+  updateWorkflowStatus();
+  loadRecentJobs();
+
+  // Set up periodic status updates
+  setInterval(updateWorkflowStatus, 10000); // Update every 10 seconds
 }
 
 function updateWorkflowStatus() {
-    if (!window.workflowService) return;
-    
-    const status = window.workflowService.getStatus();
-    const indicator = document.getElementById('workflow-status-indicator');
-    const lastRunTime = document.getElementById('last-run-time');
-    const jobsProcessed = document.getElementById('jobs-processed');
-    const jobsAdded = document.getElementById('jobs-added');
-    const runButton = document.getElementById('run-workflow-btn');
-    
-    if (indicator) {
-        const dot = indicator.querySelector('.status-dot');
-        const text = indicator.querySelector('.status-text');
-        
-        if (status.isRunning) {
-            dot.style.backgroundColor = '#ff9800';
-            text.textContent = 'Running...';
-            runButton.disabled = true;
-            runButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Running...';
-        } else {
-            dot.style.backgroundColor = '#4caf50';
-            text.textContent = 'Ready';
-            runButton.disabled = false;
-            runButton.innerHTML = '<i class="fas fa-play"></i> Run Now';
-        }
+  if (!window.workflowService) return;
+
+  const status = window.workflowService.getStatus();
+  const indicator = document.getElementById("workflow-status-indicator");
+  const lastRunTime = document.getElementById("last-run-time");
+  const jobsProcessed = document.getElementById("jobs-processed");
+  const jobsAdded = document.getElementById("jobs-added");
+  const runButton = document.getElementById("run-workflow-btn");
+
+  if (indicator) {
+    const dot = indicator.querySelector(".status-dot");
+    const text = indicator.querySelector(".status-text");
+
+    if (status.isRunning) {
+      dot.style.backgroundColor = "#ff9800";
+      text.textContent = "Running...";
+      runButton.disabled = true;
+      runButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Running...';
+    } else {
+      dot.style.backgroundColor = "#4caf50";
+      text.textContent = "Ready";
+      runButton.disabled = false;
+      runButton.innerHTML = '<i class="fas fa-play"></i> Run Now';
     }
-    
-    if (lastRunTime) {
-        lastRunTime.textContent = status.lastRun ? 
-            status.lastRun.toLocaleString() : 'Never';
-    }
-    
-    if (jobsProcessed) {
-        jobsProcessed.textContent = status.jobsProcessed || 0;
-    }
-    
-    if (jobsAdded) {
-        jobsAdded.textContent = status.jobsFiltered || 0;
-    }
+  }
+
+  if (lastRunTime) {
+    lastRunTime.textContent = status.lastRun
+      ? status.lastRun.toLocaleString()
+      : "Never";
+  }
+
+  if (jobsProcessed) {
+    jobsProcessed.textContent = status.jobsProcessed || 0;
+  }
+
+  if (jobsAdded) {
+    jobsAdded.textContent = status.jobsFiltered || 0;
+  }
 }
 
 async function triggerWorkflow() {
-    if (!window.workflowService) {
-        showWorkflowMessage('Workflow service not loaded', 'error');
-        return;
-    }
-    
-    try {
-        showWorkflowMessage('Starting workflow...', 'info');
-        const result = await window.workflowService.executeWorkflow();
-        showWorkflowMessage(`Workflow completed! Added ${result.jobsFiltered} new jobs.`, 'success');
-        loadRecentJobs(); // Refresh recent jobs list
-    } catch (error) {
-        console.error('Workflow execution failed:', error);
-        showWorkflowMessage(`Workflow failed: ${error.message}`, 'error');
-    }
+  if (!window.workflowService) {
+    showWorkflowMessage("Workflow service not loaded", "error");
+    return;
+  }
+
+  try {
+    showWorkflowMessage("Starting workflow...", "info");
+    const result = await window.workflowService.executeWorkflow();
+    showWorkflowMessage(
+      `Workflow completed! Added ${result.jobsFiltered} new jobs.`,
+      "success"
+    );
+    loadRecentJobs(); // Refresh recent jobs list
+  } catch (error) {
+    console.error("Workflow execution failed:", error);
+    showWorkflowMessage(`Workflow failed: ${error.message}`, "error");
+  }
 }
 
 async function loadRecentJobs() {
-    try {
-        const recentJobsList = document.getElementById('recent-jobs-list');
-        if (!recentJobsList || !window.db) return;
-        
-        const jobsSnapshot = await window.db.collection('jobs')
-            .orderBy('addedAt', 'desc')
-            .limit(5)
-            .get();
-        
-        if (jobsSnapshot.empty) {
-            recentJobsList.innerHTML = `
+  try {
+    const recentJobsList = document.getElementById("recent-jobs-list");
+    if (!recentJobsList || !window.db) return;
+
+    const jobsSnapshot = await window.db
+      .collection("jobs")
+      .orderBy("addedAt", "desc")
+      .limit(5)
+      .get();
+
+    if (jobsSnapshot.empty) {
+      recentJobsList.innerHTML = `
                 <div class="no-jobs-message">
                     <i class="fas fa-briefcase"></i>
                     <p>No jobs added yet. Run the workflow to fetch new jobs.</p>
                 </div>
             `;
-            return;
-        }
-        
-        let jobsHtml = '';
-        jobsSnapshot.forEach(doc => {
-            const job = doc.data();
-            jobsHtml += `
+      return;
+    }
+
+    let jobsHtml = "";
+    jobsSnapshot.forEach((doc) => {
+      const job = doc.data();
+      jobsHtml += `
                 <div class="recent-job-item">
                     <div class="job-info">
-                        <h4>${job.title || 'Untitled Position'}</h4>
-                        <p>${job.source || 'Unknown Source'}</p>
+                        <h4>${job.title || "Untitled Position"}</h4>
+                        <p>${job.source || "Unknown Source"}</p>
                     </div>
                     <div class="job-time">
-                        ${job.dateAdded || 'Recently'}
+                        ${job.dateAdded || "Recently"}
                     </div>
                 </div>
             `;
-        });
-        
-        recentJobsList.innerHTML = jobsHtml;
-        
-    } catch (error) {
-        console.error('Error loading recent jobs:', error);
-    }
+    });
+
+    recentJobsList.innerHTML = jobsHtml;
+  } catch (error) {
+    console.error("Error loading recent jobs:", error);
+  }
 }
 
 async function viewWorkflowLogs() {
-    try {
-        if (!window.db) {
-            showWorkflowMessage('Database not available', 'error');
-            return;
-        }
-        
-        const logsSnapshot = await window.db.collection('workflow_logs')
-            .orderBy('timestamp', 'desc')
-            .limit(10)
-            .get();
-        
-        let logsHtml = '<h3>Recent Workflow Executions</h3>';
-        
-        if (logsSnapshot.empty) {
-            logsHtml += '<p>No workflow logs found.</p>';
-        } else {
-            logsHtml += '<div class="logs-container">';
-            logsSnapshot.forEach(doc => {
-                const log = doc.data();
-                const timestamp = log.timestamp ? log.timestamp.toDate().toLocaleString() : 'Unknown';
-                const status = log.success ? 'Success' : 'Failed';
-                const statusClass = log.success ? 'success' : 'error';
-                
-                logsHtml += `
+  try {
+    if (!window.db) {
+      showWorkflowMessage("Database not available", "error");
+      return;
+    }
+
+    const logsSnapshot = await window.db
+      .collection("workflow_logs")
+      .orderBy("timestamp", "desc")
+      .limit(10)
+      .get();
+
+    let logsHtml = "<h3>Recent Workflow Executions</h3>";
+
+    if (logsSnapshot.empty) {
+      logsHtml += "<p>No workflow logs found.</p>";
+    } else {
+      logsHtml += '<div class="logs-container">';
+      logsSnapshot.forEach((doc) => {
+        const log = doc.data();
+        const timestamp = log.timestamp
+          ? log.timestamp.toDate().toLocaleString()
+          : "Unknown";
+        const status = log.success ? "Success" : "Failed";
+        const statusClass = log.success ? "success" : "error";
+
+        logsHtml += `
                     <div class="log-entry ${statusClass}">
                         <div class="log-header">
                             <span class="log-status">${status}</span>
@@ -390,18 +437,18 @@ async function viewWorkflowLogs() {
                         <div class="log-details">
                             Jobs Processed: ${log.jobsProcessed || 0} | 
                             Jobs Added: ${log.jobsAdded || 0}
-                            ${log.error ? `<br>Error: ${log.error}` : ''}
+                            ${log.error ? `<br>Error: ${log.error}` : ""}
                         </div>
                     </div>
                 `;
-            });
-            logsHtml += '</div>';
-        }
-        
-        // Create modal to show logs
-        const modal = document.createElement('div');
-        modal.className = 'workflow-modal';
-        modal.innerHTML = `
+      });
+      logsHtml += "</div>";
+    }
+
+    // Create modal to show logs
+    const modal = document.createElement("div");
+    modal.className = "workflow-modal";
+    modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Workflow Logs</h2>
@@ -414,25 +461,24 @@ async function viewWorkflowLogs() {
                 </div>
             </div>
         `;
-        
-        document.body.appendChild(modal);
-        
-    } catch (error) {
-        console.error('Error loading workflow logs:', error);
-        showWorkflowMessage('Failed to load workflow logs', 'error');
-    }
+
+    document.body.appendChild(modal);
+  } catch (error) {
+    console.error("Error loading workflow logs:", error);
+    showWorkflowMessage("Failed to load workflow logs", "error");
+  }
 }
 
-function showWorkflowMessage(message, type = 'info') {
-    const colors = {
-        success: '#4caf50',
-        error: '#f44336',
-        info: '#2196f3',
-        warning: '#ff9800'
-    };
-    
-    const messageDiv = document.createElement('div');
-    messageDiv.style.cssText = `
+function showWorkflowMessage(message, type = "info") {
+  const colors = {
+    success: "#4caf50",
+    error: "#f44336",
+    info: "#2196f3",
+    warning: "#ff9800",
+  };
+
+  const messageDiv = document.createElement("div");
+  messageDiv.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
@@ -445,17 +491,17 @@ function showWorkflowMessage(message, type = 'info') {
         max-width: 300px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     `;
-    messageDiv.textContent = message;
-    
-    document.body.appendChild(messageDiv);
-    
-    setTimeout(() => {
-        messageDiv.remove();
-    }, 5000);
+  messageDiv.textContent = message;
+
+  document.body.appendChild(messageDiv);
+
+  setTimeout(() => {
+    messageDiv.remove();
+  }, 5000);
 }
 
 // Add CSS for workflow management
-const workflowStyles = document.createElement('style');
+const workflowStyles = document.createElement("style");
 workflowStyles.textContent = `
     .workflow-container {
         display: grid;

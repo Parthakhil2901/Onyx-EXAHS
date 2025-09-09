@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Professional Soft Skills Mastery - Complete Training Platform</title>
+    <style>
+      /* Reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0d0d1a, #1b1c29);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        background: #12131f;
+        padding: 1.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(115, 91, 255, 0.5);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      header h1 {
+        font-size: 2.5rem;
+        background: linear-gradient(90deg, #00e6d0, #735bff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 2px;
+      }
+      nav {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      nav a {
+        color: #735bff;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+      }
+      nav a:hover,
+      nav a.active {
+        color: #00e6d0;
+        border-color: #00e6d0;
+        background: rgba(0, 230, 208, 0.1);
+      }
+      main {
+        flex: 1;
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      /* Dashboard styles */
+      .dashboard {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .skill-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .category-card {
+        background: linear-gradient(135deg, #1b1c29, #2c2c3e);
+        border-radius: 15px;
+        padding: 1.5rem;
+        border: 1px solid rgba(115, 91, 255, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .category-card:hover {
+        transform: translateY(-5px);
+        border-color: #00e6d0;
+        box-shadow: 0 10px 30px rgba(115, 91, 255, 0.3);
+      }
+
+      .category-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .category-icon {
+        font-size: 2rem;
+        margin-right: 1rem;
+        background: linear-gradient(45deg, #00e6d0, #735bff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .category-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #00e6d0;
+      }
+
+      .category-description {
+        color: #ccc;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .progress-mini {
+        background: #2c2c3e;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 6px;
+        margin-bottom: 0.5rem;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00e6d0, #735bff);
+        transition: width 0.5s ease;
+      }
+
+      .progress-text {
+        font-size: 0.8rem;
+        color: #999;
+      }
+
+      /* Sidebar styles */
+      .sidebar {
+        background: #1b1c29;
+        border-radius: 15px;
+        padding: 1.5rem;
+        height: fit-content;
+        border: 1px solid rgba(115, 91, 255, 0.3);
+      }
+
+      .sidebar h3 {
+        color: #00e6d0;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .quick-stats {
+        margin-bottom: 2rem;
+      }
+
+      .stat-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(115, 91, 255, 0.2);
+      }
+
+      .stat-value {
+        color: #735bff;
+        font-weight: bold;
+      }
+
+      .quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .quick-btn {
+        background: linear-gradient(90deg, #735bff, #00e6d0);
+        border: none;
+        padding: 0.8rem;
+        border-radius: 8px;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .quick-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(115, 91, 255, 0.4);
+      }
+
+      /* Module content styles */
+      .module-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .module-content.active {
+        display: block;
+      }
+
+      .lesson-container {
+        background: #1b1c29;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(115, 91, 255, 0.3);
+      }
+
+      .lesson-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .lesson-number {
+        background: linear-gradient(45deg, #735bff, #00e6d0);
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 1rem;
+      }
+
+      .lesson-title {
+        font-size: 1.5rem;
+        color: #00e6d0;
+      }
+
+      .lesson-objectives {
+        background: rgba(0, 230, 208, 0.1);
+        border-left: 4px solid #00e6d0;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .objectives-title {
+        font-weight: bold;
+        color: #00e6d0;
+        margin-bottom: 0.5rem;
+      }
+
+      .objectives-list {
+        list-style: none;
+      }
+
+      .objectives-list li {
+        padding: 0.3rem 0;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      .objectives-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #00e6d0;
+        font-weight: bold;
+      }
+
+      .lesson-content {
+        line-height: 1.6;
+        color: #ddd;
+      }
+
+      .lesson-content h3 {
+        color: #735bff;
+        margin: 1.5rem 0 1rem 0;
+        font-size: 1.2rem;
+      }
+
+      .lesson-content p {
+        margin-bottom: 1rem;
+      }
+
+      .practical-tips {
+        background: rgba(115, 91, 255, 0.1);
+        border-left: 4px solid #735bff;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .tips-title {
+        font-weight: bold;
+        color: #735bff;
+        margin-bottom: 0.5rem;
+      }
+
+      .action-items {
+        background: #2c2c3e;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .action-items h4 {
+        color: #00e6d0;
+        margin-bottom: 1rem;
+      }
+
+      .action-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .action-card {
+        background: rgba(115, 91, 255, 0.1);
+        border-radius: 8px;
+        padding: 1rem;
+        border: 1px solid rgba(115, 91, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .action-card:hover {
+        border-color: #00e6d0;
+        transform: translateY(-2px);
+      }
+
+      .action-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .action-title {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #00e6d0;
+      }
+
+      .action-description {
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: #1b1c29;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        border: 1px solid rgba(115, 91, 255, 0.3);
+        animation: slideIn 0.3s ease;
+      }
+
+      .modal-header {
+        background: linear-gradient(90deg, #735bff, #00e6d0);
+        padding: 1.5rem 2rem;
+        border-radius: 15px 15px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: background 0.3s ease;
+      }
+
+      .close-modal:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      /* Practice area styles */
+      .practice-area {
+        background: rgba(0, 230, 208, 0.05);
+        border: 1px solid rgba(0, 230, 208, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .scenario-card {
+        background: #2c2c3e;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid #735bff;
+      }
+
+      .scenario-title {
+        color: #00e6d0;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .email-composer {
+        margin-top: 1rem;
+      }
+
+      .email-field {
+        margin-bottom: 1rem;
+      }
+
+      .email-field label {
+        display: block;
+        color: #00e6d0;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .email-field input,
+      .email-field textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid rgba(115, 91, 255, 0.5);
+        border-radius: 6px;
+        background: rgba(115, 91, 255, 0.1);
+        color: #fff;
+        font-family: inherit;
+      }
+
+      .email-field textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .ai-feedback {
+        background: rgba(115, 91, 255, 0.1);
+        border: 1px solid rgba(115, 91, 255, 0.3);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+      }
+
+      .feedback-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .feedback-icon {
+        font-size: 1.2rem;
+        margin-right: 0.5rem;
+      }
+
+      .feedback-title {
+        color: #00e6d0;
+        font-weight: bold;
+      }
+
+      .hr-questions {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .question-card {
+        background: #2c2c3e;
+        border-radius: 8px;
+        padding: 1.5rem;
+        border-left: 4px solid #00e6d0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .question-card:hover {
+        transform: translateX(5px);
+        background: rgba(0, 230, 208, 0.1);
+      }
+
+      .question-text {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #fff;
+      }
+
+      .question-category {
+        font-size: 0.8rem;
+        color: #00e6d0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .answer-section {
+        display: none;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(115, 91, 255, 0.3);
+      }
+
+      .answer-section.active {
+        display: block;
+      }
+
+      .sample-answer {
+        background: rgba(115, 91, 255, 0.1);
+        padding: 1rem;
+        border-radius: 6px;
+        margin-top: 0.5rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+
+        .skill-categories {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 1rem;
+        }
+
+        .action-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Professional Soft Skills Mastery</h1>
+      <nav id="mainNav">
+        <a href="#dashboard" class="nav-link active" data-view="dashboard"
+          >Dashboard</a
+        >
+        <a href="#communication" class="nav-link" data-view="communication"
+          >Communication</a
+        >
+        <a href="#time-management" class="nav-link" data-view="time-management"
+          >Time Management</a
+        >
+        <a href="#email-practice" class="nav-link" data-view="email-practice"
+          >Email Practice</a
+        >
+        <a href="#hr-interview" class="nav-link" data-view="hr-interview"
+          >HR Interview Prep</a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <!-- Dashboard View -->
+      <div id="dashboard" class="view active">
+        <div class="dashboard">
+          <div class="skill-categories">
+            <div class="category-card" data-category="communication">
+              <div class="category-header">
+                <div class="category-icon">💬</div>
+                <div class="category-title">Communication Mastery</div>
+              </div>
+              <div class="category-description">
+                Master verbal, non-verbal, and written communication. Learn
+                active listening, public speaking, and professional
+                correspondence.
+              </div>
+              <div class="progress-mini">
+                <div class="progress-fill" style="width: 25%"></div>
+              </div>
+              <div class="progress-text">25% Complete • 8 lessons</div>
+            </div>
+
+            <div class="category-card" data-category="time-management">
+              <div class="category-header">
+                <div class="category-icon">⏰</div>
+                <div class="category-title">Time Management</div>
+              </div>
+              <div class="category-description">
+                Prioritization techniques, productivity systems, deadline
+                management, and work-life balance strategies.
+              </div>
+              <div class="progress-mini">
+                <div class="progress-fill" style="width: 40%"></div>
+              </div>
+              <div class="progress-text">40% Complete • 6 lessons</div>
+            </div>
+
+            <div class="category-card" data-category="leadership">
+              <div class="category-header">
+                <div class="category-icon">👑</div>
+                <div class="category-title">Leadership Skills</div>
+              </div>
+              <div class="category-description">
+                Develop emotional intelligence, team motivation,
+                decision-making, and conflict resolution abilities.
+              </div>
+              <div class="progress-mini">
+                <div class="progress-fill" style="width: 15%"></div>
+              </div>
+              <div class="progress-text">15% Complete • 10 lessons</div>
+            </div>
+
+            <div class="category-card" data-category="teamwork">
+              <div class="category-header">
+                <div class="category-icon">🤝</div>
+                <div class="category-title">Teamwork & Collaboration</div>
+              </div>
+              <div class="category-description">
+                Cross-functional collaboration, cultural sensitivity, virtual
+                team dynamics, and project coordination.
+              </div>
+              <div class="progress-mini">
+                <div class="progress-fill" style="width: 60%"></div>
+              </div>
+              <div class="progress-text">60% Complete • 5 lessons</div>
+            </div>
+          </div>
+
+          <div class="sidebar">
+            <div class="quick-stats">
+              <h3>Your Progress</h3>
+              <div class="stat-item">
+                <span>Total Lessons</span>
+                <span class="stat-value">29</span>
+              </div>
+              <div class="stat-item">
+                <span>Completed</span>
+                <span class="stat-value">12</span>
+              </div>
+              <div class="stat-item">
+                <span>Practice Sessions</span>
+                <span class="stat-value">45</span>
+              </div>
+              <div class="stat-item">
+                <span>Streak</span>
+                <span class="stat-value">7 days</span>
+              </div>
+            </div>
+
+            <div class="quick-actions">
+              <h3>Quick Actions</h3>
+              <button class="quick-btn" data-action="email-practice">
+                Practice Email Writing
+              </button>
+              <button class="quick-btn" data-action="hr-prep">
+                HR Interview Prep
+              </button>
+              <button class="quick-btn" data-action="daily-challenge">
+                Daily Challenge
+              </button>
+              <button class="quick-btn" data-action="progress-report">
+                View Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Communication Module -->
+      <div id="communication" class="view module-content">
+        <div class="lesson-container">
+          <div class="lesson-header">
+            <div class="lesson-number">1</div>
+            <div class="lesson-title">
+              Foundations of Effective Communication
+            </div>
+          </div>
+
+          <div class="lesson-objectives">
+            <div class="objectives-title">Learning Objectives</div>
+            <ul class="objectives-list">
+              <li>Understand the communication process and barriers</li>
+              <li>Master verbal and non-verbal communication techniques</li>
+              <li>Apply active listening skills in professional settings</li>
+              <li>Adapt communication style to different audiences</li>
+            </ul>
+          </div>
+
+          <div class="lesson-content">
+            <h3>What is Effective Communication?</h3>
+            <p>
+              Effective communication is the process of exchanging information,
+              ideas, and feelings in a way that creates mutual understanding. It
+              involves not just speaking clearly, but also listening actively,
+              understanding context, and responding appropriately.
+            </p>
+
+            <h3>The Communication Process</h3>
+            <p>Every communication involves six key elements:</p>
+            <p>
+              <strong>Sender:</strong> The person initiating the message<br />
+              <strong>Message:</strong> The information being communicated<br />
+              <strong>Channel:</strong> The medium used (verbal, written,
+              digital)<br />
+              <strong>Receiver:</strong> The person receiving the message<br />
+              <strong>Feedback:</strong> The response or acknowledgment<br />
+              <strong>Context:</strong> The environment and circumstances
+            </p>
+
+            <div class="practical-tips">
+              <div class="tips-title">Practical Tips for Daily Application</div>
+              <p>
+                <strong>Before Speaking:</strong> Think about your audience and
+                objective<br />
+                <strong>While Speaking:</strong> Use clear, simple language and
+                maintain eye contact<br />
+                <strong>After Speaking:</strong> Ask for feedback and confirm
+                understanding<br />
+                <strong>When Listening:</strong> Give full attention, avoid
+                interrupting, ask clarifying questions
+              </p>
+            </div>
+
+            <h3>Common Communication Barriers</h3>
+            <p>
+              <strong>Physical Barriers:</strong> Noise, distance, technology
+              issues<br />
+              <strong>Emotional Barriers:</strong> Stress, anger, fear, bias<br />
+              <strong>Language Barriers:</strong> Jargon, cultural differences,
+              unclear expression<br />
+              <strong>Organizational Barriers:</strong> Hierarchy, policies,
+              time constraints
+            </p>
+          </div>
+
+          <div class="action-items">
+            <h4>Practice Activities</h4>
+            <div class="action-grid">
+              <div class="action-card" data-action="listening-exercise">
+                <div class="action-icon">👂</div>
+                <div class="action-title">Active Listening Challenge</div>
+                <div class="action-description">
+                  Practice identifying key points and emotional cues in
+                  conversations
+                </div>
+              </div>
+              <div class="action-card" data-action="presentation-builder">
+                <div class="action-icon">🎤</div>
+                <div class="action-title">Presentation Builder</div>
+                <div class="action-description">
+                  Create and practice a 5-minute professional presentation
+                </div>
+              </div>
+              <div class="action-card" data-action="feedback-simulator">
+                <div class="action-icon">💭</div>
+                <div class="action-title">Feedback Simulator</div>
+                <div class="action-description">
+                  Practice giving and receiving constructive feedback
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time Management Module -->
+      <div id="time-management" class="view module-content">
+        <div class="lesson-container">
+          <div class="lesson-header">
+            <div class="lesson-number">1</div>
+            <div class="lesson-title">Time Management Fundamentals</div>
+          </div>
+
+          <div class="lesson-objectives">
+            <div class="objectives-title">Learning Objectives</div>
+            <ul class="objectives-list">
+              <li>Identify your time wasters and productivity patterns</li>
+              <li>Master the Eisenhower Matrix for prioritization</li>
+              <li>Implement the Pomodoro Technique effectively</li>
+              <li>Create sustainable daily and weekly routines</li>
+            </ul>
+          </div>
+
+          <div class="lesson-content">
+            <h3>Understanding Time Management</h3>
+            <p>
+              Time management isn't about doing more things—it's about doing the
+              right things efficiently. It's a set of skills that help you use
+              time effectively to achieve your goals while maintaining work-life
+              balance.
+            </p>
+
+            <h3>The Eisenhower Matrix</h3>
+            <p>Organize tasks into four quadrants:</p>
+            <p>
+              <strong>Quadrant 1:</strong> Urgent + Important (Do First)<br />
+              <strong>Quadrant 2:</strong> Not Urgent + Important (Schedule)<br />
+              <strong>Quadrant 3:</strong> Urgent + Not Important (Delegate)<br />
+              <strong>Quadrant 4:</strong> Not Urgent + Not Important
+              (Eliminate)
+            </p>
+
+            <div class="practical-tips">
+              <div class="tips-title">Daily Time Management Routine</div>
+              <p>
+                <strong>Morning (5 min):</strong> Review your priorities and
+                plan your day<br />
+                <strong>Work Blocks (25 min):</strong> Focus on one task using
+                Pomodoro Technique<br />
+                <strong>Breaks (5 min):</strong> Step away from work, stretch,
+                hydrate<br />
+                <strong>Evening (10 min):</strong> Reflect on accomplishments
+                and plan tomorrow
+              </p>
+            </div>
+
+            <h3>Common Time Wasters</h3>
+            <p>
+              <strong>Digital Distractions:</strong> Social media, unnecessary
+              emails, notifications<br />
+              <strong>Poor Planning:</strong> Not setting clear goals or
+              deadlines<br />
+              <strong>Perfectionism:</strong> Spending too much time on minor
+              details<br />
+              <strong>Procrastination:</strong> Avoiding difficult or unpleasant
+              tasks
+            </p>
+          </div>
+
+          <div class="action-items">
+            <h4>Time Management Tools</h4>
+            <div class="action-grid">
+              <div class="action-card" data-action="time-audit">
+                <div class="action-icon">📊</div>
+                <div class="action-title">Time Audit Tool</div>
+                <div class="action-description">
+                  Track how you spend time for one week to identify patterns
+                </div>
+              </div>
+              <div class="action-card" data-action="priority-matrix">
+                <div class="action-icon">📋</div>
+                <div class="action-title">Priority Matrix</div>
+                <div class="action-description">
+                  Organize your tasks using the Eisenhower Matrix
+                </div>
+              </div>
+              <div class="action-card" data-action="pomodoro-timer">
+                <div class="action-icon">⏲️</div>
+                <div class="action-title">Pomodoro Timer</div>
+                <div class="action-description">
+                  Practice focused work sessions with built-in breaks
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Practice Module -->
+      <div id="email-practice" class="view module-content">
+        <div class="lesson-container">
+          <div class="lesson-header">
+            <div class="lesson-number">📧</div>
+            <div class="lesson-title">Professional Email & Chat Mastery</div>
+          </div>
+
+          <div class="practice-area">
+            <h3>Email Writing Scenarios</h3>
+            <div id="emailScenarios"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HR Interview Module -->
+      <div id="hr-interview" class="view module-content">
+        <div class="lesson-container">
+          <div class="lesson-header">
+            <div class="lesson-number">🎯</div>
+            <div class="lesson-title">
+              HR Interview Preparation - Must Know Questions
+            </div>
+          </div>
+
+          <div class="practice-area">
+            <h3>Essential HR Interview Questions with Sample Answers</h3>
+            <div id="hrQuestions"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <button class="close-modal" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <script>
+      // Data structures
+      const skillCategories = {
+        communication: {
+          title: "Communication Mastery",
+          mustKnowTips: [
+            "Active Listening: Focus fully on the speaker, understand, and respond thoughtfully.",
+            "Clarity & Conciseness: Get straight to the point, avoid jargon, and be easy to understand.",
+            "Non-Verbal Cues: Pay attention to body language, tone, and facial expressions (yours and others').",
+            "Empathy: Understand and share the feelings of another, tailoring your message accordingly.",
+            "Feedback Loop: Always seek and provide constructive feedback to ensure understanding.",
+          ],
+          recommendedVideos: [
+            {
+              title: "How to Speak so That People Want to Listen",
+              platform: "TED Talk",
+              duration: "10 min",
+              description:
+                "Julian Treasure shares powerful tips on how to speak with impact and be heard.",
+              url: "https://www.youtube.com/watch?v=EO3_E_20Q_o",
+            },
+            {
+              title: "The Power of Vulnerability",
+              platform: "TED Talk",
+              duration: "20 min",
+              description:
+                "Brené Brown discusses the importance of vulnerability in connection and communication.",
+              url: "https://www.youtube.com/watch?v=iCvmsMzlF7o",
+            },
+          ],
+          courses: [
+            {
+              title: "Active Listening Mastery",
+              duration: "2 hours",
+              level: "Beginner",
+              description:
+                "Learn to listen effectively, understand non-verbal cues, and respond appropriately in professional settings.",
+            },
+            {
+              title: "Public Speaking Confidence",
+              duration: "3 hours",
+              level: "Intermediate",
+              description:
+                "Overcome speaking anxiety, structure presentations, and engage audiences effectively.",
+            },
+            {
+              title: "Cross-Cultural Communication",
+              duration: "2.5 hours",
+              level: "Advanced",
+              description:
+                "Navigate cultural differences, adapt communication styles, and build inclusive workplace relationships.",
+            },
+            {
+              title: "Difficult Conversations",
+              duration: "4 hours",
+              level: "Advanced",
+              description:
+                "Handle conflicts, deliver difficult feedback, and maintain relationships during challenging discussions.",
+            },
+          ],
+        },
+        "time-management": {
+          title: "Time Management",
+          mustKnowTips: [
+            "Prioritize Ruthlessly: Use the Eisenhower Matrix to focus on important, non-urgent tasks.",
+            "Avoid Multitasking: Focus on one task at a time for better quality and efficiency.",
+            "Set SMART Goals: Ensure goals are Specific, Measurable, Achievable, Relevant, and Time-bound.",
+            "Batch Similar Tasks: Group similar activities (e.g., emails, calls) to reduce context switching.",
+            "Take Regular Breaks: Step away from your work to recharge and maintain focus.",
+          ],
+          recommendedVideos: [
+            {
+              title: "How to Gain Control of Your Free Time",
+              platform: "TED Talk",
+              duration: "11 min",
+              description:
+                "Laura Vanderkam shares strategies for making time for what matters most.",
+              url: "https://www.youtube.com/watch?v=n3htNqyQKTQ",
+            },
+            {
+              title: "The Pomodoro Technique",
+              platform: "YouTube",
+              duration: "5 min",
+              description:
+                "A quick guide to using the Pomodoro Technique for focused work sessions.",
+              url: "https://www.youtube.com/watch?v=mNBmG2id4i8",
+            },
+          ],
+          courses: [
+            {
+              title: "Priority Matrix Mastery",
+              duration: "1.5 hours",
+              level: "Beginner",
+              description:
+                "Master the Eisenhower Matrix to prioritize tasks effectively and eliminate time wasters.",
+            },
+            {
+              title: "Pomodoro Technique",
+              duration: "1 hour",
+              level: "Beginner",
+              description:
+                "Implement focused work sessions with strategic breaks for maximum productivity.",
+            },
+            {
+              title: "Advanced Planning Systems",
+              duration: "3 hours",
+              level: "Intermediate",
+              description:
+                "Create sustainable planning systems, set SMART goals, and track progress effectively.",
+            },
+            {
+              title: "Work-Life Balance",
+              duration: "2 hours",
+              level: "Intermediate",
+              description:
+                "Set boundaries, manage stress, and maintain productivity without burnout.",
+            },
+          ],
+        },
+        leadership: {
+          title: "Leadership Skills",
+          mustKnowTips: [
+            "Lead by Example: Your actions speak louder than words; embody the values you expect.",
+            "Empower Your Team: Delegate effectively and trust your team members to take ownership.",
+            "Provide Clear Vision: Communicate goals and expectations clearly to align efforts.",
+            "Foster Growth: Invest in your team's development and provide opportunities for learning.",
+            "Practice Empathy: Understand your team's perspectives and challenges to build stronger relationships.",
+          ],
+          recommendedVideos: [
+            {
+              title: "Why good leaders make you feel safe",
+              platform: "TED Talk",
+              duration: "12 min",
+              description:
+                "Simon Sinek explains how great leaders create environments of trust and cooperation.",
+              url: "https://www.youtube.com/watch?v=lmyZMtPVodo",
+            },
+            {
+              title: "The 5 Levels of Leadership",
+              platform: "YouTube",
+              duration: "8 min",
+              description:
+                "An overview of John C. Maxwell's leadership levels for personal and organizational growth.",
+              url: "https://www.youtube.com/watch?v=A8s8g1Qj8g",
+            },
+          ],
+          courses: [
+            {
+              title: "Emotional Intelligence for Leaders",
+              duration: "4 hours",
+              level: "Intermediate",
+              description:
+                "Develop self-awareness, empathy, and social skills to lead effectively.",
+            },
+            {
+              title: "Team Motivation Strategies",
+              duration: "3 hours",
+              level: "Intermediate",
+              description:
+                "Learn to inspire, motivate, and engage team members for peak performance.",
+            },
+            {
+              title: "Decision Making Framework",
+              duration: "2.5 hours",
+              level: "Advanced",
+              description:
+                "Make confident decisions under pressure using structured frameworks and risk assessment.",
+            },
+            {
+              title: "Conflict Resolution",
+              duration: "3.5 hours",
+              level: "Advanced",
+              description:
+                "Mediate disputes, find win-win solutions, and maintain team harmony.",
+            },
+          ],
+        },
+        teamwork: {
+          title: "Teamwork & Collaboration",
+          mustKnowTips: [
+            "Communicate Openly: Share information, ideas, and concerns transparently.",
+            "Respect Diverse Perspectives: Value different viewpoints and backgrounds for richer solutions.",
+            "Define Roles Clearly: Ensure everyone understands their responsibilities to avoid overlap.",
+            "Offer Support: Be willing to help teammates and ask for help when needed.",
+            "Celebrate Successes: Acknowledge and celebrate team achievements to build morale.",
+          ],
+          recommendedVideos: [
+            {
+              title: "The surprising habits of original thinkers",
+              platform: "TED Talk",
+              duration: "15 min",
+              description:
+                "Adam Grant on how to champion new ideas and build a culture of originality.",
+              url: "https://www.youtube.com/watch?v=fxbCH7g3BQA",
+            },
+            {
+              title: "Building a Culture of Collaboration",
+              platform: "YouTube",
+              duration: "7 min",
+              description:
+                "Tips for fostering a collaborative environment within your team.",
+              url: "https://www.youtube.com/watch?v=4Q2x8E6Z8zM",
+            },
+          ],
+          courses: [
+            {
+              title: "Virtual Team Dynamics",
+              duration: "2 hours",
+              level: "Beginner",
+              description:
+                "Excel in remote collaboration, virtual meetings, and digital team building.",
+            },
+            {
+              title: "Project Coordination",
+              duration: "3 hours",
+              level: "Intermediate",
+              description:
+                "Coordinate cross-functional projects, manage stakeholders, and deliver results on time.",
+            },
+            {
+              title: "Building Trust in Teams",
+              duration: "2.5 hours",
+              level: "Intermediate",
+              description:
+                "Create psychological safety, build rapport, and foster collaborative relationships.",
+            },
+            {
+              title: "Agile Team Practices",
+              duration: "4 hours",
+              level: "Advanced",
+              description:
+                "Implement agile methodologies, facilitate effective standups, and embrace continuous improvement.",
+            },
+          ],
+        },
+      };
+
+      const emailScenarios = [
+        {
+          title: "Requesting Time Off",
+          context:
+            "You need to request 3 days off next month for a family emergency",
+          tips: "Be clear about dates, provide adequate notice, suggest coverage plans",
+          template: {
+            subject: "Time Off Request - [Your Name] - [Dates]",
+            body: "Dear [Manager's Name],\n\nI am writing to request time off from [start date] to [end date] due to [brief reason].\n\nI have reviewed my current projects and commitments:\n- [Project 1]: Will be completed before my leave\n- [Project 2]: [Colleague name] has agreed to cover\n- All urgent matters will be addressed before my departure\n\nI will ensure a smooth transition and be available for any questions before I leave. Thank you for your consideration.\n\nBest regards,\n[Your name]",
+          },
+        },
+        {
+          title: "Following Up on a Meeting",
+          context: "Send a follow-up email after a project planning meeting",
+          tips: "Summarize key points, clarify action items, set next steps",
+          template: {
+            subject: "Meeting Follow-up - [Project Name] Planning - [Date]",
+            body: "Hi Team,\n\nThank you for the productive meeting today. Here's a summary of what we discussed:\n\nKEY DECISIONS:\n- [Decision 1]\n- [Decision 2]\n\nACTION ITEMS:\n- [Person]: [Task] - Due: [Date]\n- [Person]: [Task] - Due: [Date]\n\nNEXT STEPS:\n- Next meeting: [Date and time]\n- [Any other important next steps]\n\nPlease let me know if I missed anything or if you have questions.\n\nBest regards,\n[Your name]",
+          },
+        },
+        {
+          title: "Reporting a Problem",
+          context:
+            "Report a technical issue affecting your team's productivity",
+          tips: "Be specific about the problem, include impact assessment, suggest solutions",
+          template: {
+            subject: "URGENT: Technical Issue Affecting [Team/Project]",
+            body: "Dear [IT/Manager],\n\nI'm writing to report a technical issue that is currently affecting our team's productivity.\n\nPROBLEM DESCRIPTION:\n[Detailed description of the issue]\n\nIMPACT:\n- Affected users: [number/who]\n- Business impact: [describe impact]\n- Estimated downtime: [if applicable]\n\nSTEPS TAKEN:\n- [What you've already tried]\n- [Any temporary workarounds]\n\nREQUESTED ACTION:\n[What you need from the recipient]\n\nPlease let me know if you need additional information.\n\nUrgent response appreciated.\n\n[Your name]",
+          },
+        },
+        {
+          title: "Declining a Meeting Politely",
+          context:
+            "You have a scheduling conflict and need to decline a meeting invitation",
+          tips: "Acknowledge importance, explain briefly, offer alternatives",
+          template: {
+            subject: "Re: [Meeting Title] - Unable to Attend",
+            body: "Dear [Organizer],\n\nThank you for including me in [meeting title] scheduled for [date/time].\n\nUnfortunately, I have a scheduling conflict and won't be able to attend. I understand this meeting covers [topic] which is important to [project/team].\n\nALTERNATIVES:\n- Could we reschedule for [alternative times]?\n- I'm happy to review meeting notes and provide input afterward\n- [Colleague name] could represent our team's perspective\n\nPlease let me know how I can still contribute to the discussion.\n\nThank you for understanding.\n\nBest regards,\n[Your name]",
+          },
+        },
+        {
+          title: "Introducing Yourself to New Team",
+          context: "First day email to introduce yourself to your new team",
+          tips: "Be warm but professional, share relevant background, express enthusiasm",
+          template: {
+            subject: "Hello from [Your Name] - New [Your Title]",
+            body: "Dear Team,\n\nI'm excited to introduce myself as the new [your title] joining [team/department] today.\n\nA bit about my background:\n- [Previous role/company] for [duration]\n- Experience in [relevant skills/areas]\n- [Personal interest that might be relevant]\n\nI'm looking forward to:\n- Learning about current projects and priorities\n- Meeting each of you individually\n- Contributing to the team's success\n\nI'll be setting up one-on-one meetings over the next few weeks to get to know everyone better. In the meantime, please feel free to stop by my desk or send me a message.\n\nThank you for the warm welcome!\n\nBest regards,\n[Your name]",
+          },
+        },
+      ];
+
+      const hrQuestions = [
+        {
+          category: "About Yourself",
+          question: "Tell me about yourself.",
+          tips: "Keep it professional, focus on relevant experience, follow present-past-future structure",
+          sampleAnswer:
+            "I'm a dedicated professional with [X years] of experience in [your field]. Currently, I work as [current role] where I've successfully [key achievement]. My background includes [relevant skills/experience] which I developed through [previous roles/education]. I'm particularly passionate about [relevant interest] and have demonstrated this through [specific example]. Looking ahead, I'm excited about this opportunity because it would allow me to [how role aligns with goals] and contribute to [company's mission/values].",
+          followUp: "What specific experiences shaped your career path?",
+        },
+        {
+          category: "Motivation",
+          question: "Why do you want to work here?",
+          tips: "Research the company, connect your values with theirs, be specific about what attracts you",
+          sampleAnswer:
+            "I'm drawn to [Company] for several reasons. First, your commitment to [specific company value/mission] aligns perfectly with my professional values. I'm particularly impressed by [specific recent achievement/project/initiative]. The role offers the opportunity to [specific responsibilities] which matches my experience in [relevant area]. Additionally, I see tremendous potential for growth here, especially in [specific area], and I'd love to contribute to [specific company goal or project].",
+          followUp:
+            "What do you know about our recent challenges or achievements?",
+        },
+        {
+          category: "Strengths",
+          question: "What are your greatest strengths?",
+          tips: "Choose strengths relevant to the job, provide specific examples, show impact",
+          sampleAnswer:
+            "One of my greatest strengths is my ability to [specific strength], which I've demonstrated through [specific example]. For instance, at [previous company], I [detailed example with measurable results]. Another key strength is my [second strength]. This helped me [another example with results]. These strengths have consistently enabled me to [how they benefit employers] and I'm excited to bring them to this role.",
+          followUp:
+            "Can you give me an example of when this strength helped solve a problem?",
+        },
+        {
+          category: "Weaknesses",
+          question: "What is your greatest weakness?",
+          tips: "Choose a real weakness, show self-awareness, demonstrate improvement efforts",
+          sampleAnswer:
+            "I've identified that I sometimes focus too much on perfecting details, which can slow down my initial progress on projects. I realized this when [specific example]. Since then, I've been working on this by [specific steps taken to improve]. For example, I now [specific strategy] which has helped me [measurable improvement]. I've learned that sometimes 'good enough' to move forward is better than perfect but late.",
+          followUp: "How do you handle feedback about areas for improvement?",
+        },
+        {
+          category: "Experience",
+          question:
+            "Describe a challenging situation you faced at work and how you handled it.",
+          tips: "Use the STAR method (Situation, Task, Action, Result), focus on your role and impact",
+          sampleAnswer:
+            "At my previous company, we faced a situation where [describe situation]. I was tasked with [your responsibility]. I approached this by [specific actions taken]. The key steps I took were: [numbered list of 2-3 actions]. As a result, [specific positive outcome with metrics if possible]. This experience taught me [key learning] and reinforced my ability to [relevant skill].",
+          followUp:
+            "What would you do differently if faced with a similar situation?",
+        },
+        {
+          category: "Teamwork",
+          question:
+            "Tell me about a time you worked with a difficult team member.",
+          tips: "Show diplomacy, focus on resolution, avoid speaking negatively about others",
+          sampleAnswer:
+            "I once worked with a colleague who had a very different communication style that initially created some friction. They preferred direct, brief communication while I tend to provide more context. I recognized this was affecting our collaboration, so I [specific action taken]. I arranged a brief conversation to understand their preferred working style and shared mine. We agreed on [specific solution]. This improved our working relationship significantly, and we successfully [positive outcome]. I learned the importance of adapting communication styles to work effectively with diverse personalities.",
+          followUp: "How do you handle disagreements with colleagues?",
+        },
+        {
+          category: "Goals",
+          question: "Where do you see yourself in 5 years?",
+          tips: "Show ambition but realistic expectations, align with company growth opportunities",
+          sampleAnswer:
+            "In five years, I see myself having grown significantly in [relevant skill areas] and taking on greater responsibility in [specific area]. I'd like to have contributed to [company-specific goals] and potentially be in a position where I'm [next level responsibility]. I'm particularly interested in developing expertise in [specific area relevant to company] and eventually leading [type of projects/teams]. I see this role as an important step in that direction because it offers [specific opportunities in the role].",
+          followUp: "What skills do you want to develop to reach those goals?",
+        },
+        {
+          category: "Problem Solving",
+          question: "How do you handle pressure and tight deadlines?",
+          tips: "Show stress management skills, provide specific strategies, give examples",
+          sampleAnswer:
+            "I handle pressure by staying organized and maintaining clear priorities. When facing tight deadlines, I first [specific step 1], then [specific step 2]. For example, during [specific situation], I [detailed example of handling pressure]. I find that [personal strategy] helps me stay focused and productive under pressure. I also believe in communicating proactively with stakeholders about timeline challenges and potential solutions. This approach has helped me successfully deliver [specific results] even in high-pressure situations.",
+          followUp:
+            "Tell me about a time when you missed a deadline and how you handled it.",
+        },
+        {
+          category: "Company Fit",
+          question: "Why are you leaving your current job?",
+          tips: "Stay positive, focus on growth opportunities, avoid criticizing current employer",
+          sampleAnswer:
+            "I've really enjoyed my time at [current company] and have learned [specific things]. However, I'm looking for new challenges and opportunities to [specific growth area]. While my current role has been valuable, I feel I've reached a point where I'm ready for [next level of responsibility/new challenges]. This position particularly excites me because it offers [specific opportunities] that align with my career goals. I'm looking for a role where I can [specific contribution] and continue growing professionally.",
+          followUp: "What would make you stay in a job long-term?",
+        },
+        {
+          category: "Salary & Benefits",
+          question: "What are your salary expectations?",
+          tips: "Research market rates, provide a range, be flexible, focus on total package",
+          sampleAnswer:
+            "Based on my research of similar roles in this market and my experience level, I understand the range is typically between [lower end] and [upper end]. I'm looking for a competitive package that reflects the value I can bring to the role. However, I'm also interested in the complete package including [benefits important to you]. I'm confident we can find a mutually beneficial arrangement, and I'm more focused on finding the right opportunity where I can contribute meaningfully.",
+          followUp: "What benefits are most important to you?",
+        },
+      ];
+
+      // DOM elements
+      const views = document.querySelectorAll(".view");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const categoryCards = document.querySelectorAll(".category-card");
+      const quickBtns = document.querySelectorAll(".quick-btn");
+      const modal = document.getElementById("modal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalBody = document.getElementById("modalBody");
+      const closeModal = document.getElementById("closeModal");
+
+      // Navigation functionality
+      function showView(viewId) {
+        views.forEach((view) => {
+          view.classList.remove("active");
+        });
+        document.getElementById(viewId).classList.add("active");
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+        });
+        document
+          .querySelector(`[data-view="${viewId}"]`)
+          .classList.add("active");
+      }
+
+      // Event listeners for navigation
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const viewId = link.dataset.view;
+          showView(viewId);
+
+          // Load specific content for each view
+          if (viewId === "email-practice") {
+            loadEmailScenarios();
+          } else if (viewId === "hr-interview") {
+            loadHRQuestions();
+          }
+        });
+      });
+
+      // Category card clicks
+      categoryCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const category = card.dataset.category;
+          showCourseModal(category);
+        });
+      });
+
+      // Quick action buttons
+      quickBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const action = btn.dataset.action;
+          handleQuickAction(action);
+        });
+      });
+
+      // Modal functionality
+      closeModal.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("active");
+        }
+      });
+
+      // Show course modal
+      function showCourseModal(category) {
+        try {
+          const categoryData = skillCategories[category];
+          if (!categoryData) {
+            throw new Error(`Category data not found for: ${category}`);
+          }
+          modalTitle.textContent =
+            categoryData.title + " - Complete Learning Path";
+
+          const tipsHTML = `
+                  <div style="background: linear-gradient(135deg, rgba(0, 230, 208, 0.1), rgba(115, 91, 255, 0.1)); border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(0, 230, 208, 0.3);">
+                      <h3 style="color: #00E6D0; margin-bottom: 1rem; display: flex; align-items: center;">
+                          <span style="font-size: 1.5rem; margin-right: 0.5rem;">💡</span>
+                          5 Must-Remember Tips
+                      </h3>
+                      ${categoryData.mustKnowTips
+                        .map(
+                          (tip, index) => `
+                          <div style="display: flex; align-items: flex-start; margin-bottom: 1rem; padding: 0.8rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                              <div style="background: #00E6D0; color: #0D0D1A; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 1rem; flex-shrink: 0;">${
+                                index + 1
+                              }</div>
+                              <div style="color: #fff; line-height: 1.4;">${tip}</div>
+                          </div>
+                      `
+                        )
+                        .join("")}
+                  </div>
+              `;
+
+          const videosHTML = `
+                  <div style="margin-bottom: 2rem;">
+                      <h3 style="color: #735BFF; margin-bottom: 1rem; display: flex; align-items: center;">
+                          <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎥</span>
+                          Must-Watch Videos & Courses
+                      </h3>
+                      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                          ${categoryData.recommendedVideos
+                            .map(
+                              (video) => `
+                              <div style="background: #2C2C3E; border-radius: 8px; padding: 1.5rem; border-left: 4px solid #735BFF; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                  <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.5rem;">
+                                      <h4 style="color: #00E6D0; margin: 0; margin-bottom: 0.5rem;">${video.title}</h4>
+                                  </div>
+                                  <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem;">
+                                      <span style="background: rgba(115, 91, 255, 0.2); color: #735BFF; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem;">${video.platform}</span>
+                                      <span style="background: rgba(0, 230, 208, 0.2); color: #00E6D0; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem;">${video.duration}</span>
+                                  </div>
+                                  <p style="color: #ccc; margin-bottom: 1rem; line-height: 1.4; font-size: 0.9rem;">${video.description}</p>
+                                  <a href="${video.url}" target="_blank" rel="noopener noreferrer" style="background: linear-gradient(90deg, #735BFF, #00E6D0); border: none; padding: 0.6rem 1.2rem; border-radius: 6px; color: white; font-weight: 600; text-decoration: none; display: inline-block; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Watch Now</a>
+                              </div>
+                          `
+                            )
+                            .join("")}
+                      </div>
+                  </div>
+              `;
+
+          const coursesHTML = `
+                  <div>
+                      <h3 style="color: #00E6D0; margin-bottom: 1rem; display: flex; align-items: center;">
+                          <span style="font-size: 1.5rem; margin-right: 0.5rem;">📚</span>
+                          Internal Training Modules
+                      </h3>
+                      ${categoryData.courses
+                        .map(
+                          (course) => `
+                          <div style="background: #2C2C3E; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; border-left: 4px solid #00E6D0;">
+                              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                  <h4 style="color: #00E6D0; margin: 0;">${course.title}</h4>
+                                  <div style="display: flex; gap: 0.5rem;">
+                                      <span style="background: rgba(115, 91, 255, 0.2); color: #735BFF; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem;">${course.level}</span>
+                                      <span style="background: rgba(0, 230, 208, 0.2); color: #00E6D0; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem;">${course.duration}</span>
+                                  </div>
+                              </div>
+                              <p style="color: #ccc; margin-bottom: 1rem; line-height: 1.4;">${course.description}</p>
+                              <button onclick="startCourse('${course.title}')" style="background: linear-gradient(90deg, #735BFF, #00E6D0); border: none; padding: 0.6rem 1.2rem; border-radius: 6px; color: white; font-weight: 600; cursor: pointer;">Start Course</button>
+                          </div>
+                      `
+                        )
+                        .join("")}
+                  </div>
+              `;
+
+          modalBody.innerHTML = tipsHTML + videosHTML + coursesHTML;
+          modal.classList.add("active");
+        } catch (error) {
+          console.error("Error showing course modal:", error);
+          alert(
+            "An error occurred while loading the course content. Please try again."
+          );
+        }
+      }
+
+      // Load email scenarios
+      function loadEmailScenarios() {
+        try {
+          const container = document.getElementById("emailScenarios");
+          if (!container) {
+            throw new Error("Email scenarios container not found");
+          }
+          const scenariosHTML = emailScenarios
+            .map(
+              (scenario, index) => `
+                  <div class="scenario-card" style="margin-bottom: 1.5rem;">
+                      <div class="scenario-title">${scenario.title}</div>
+                      <p style="color: #ccc; margin: 0.5rem 0;"><strong>Context:</strong> ${scenario.context}</p>
+                      <p style="color: #999; margin-bottom: 1rem; font-style: italic;"><strong>Tips:</strong> ${scenario.tips}</p>
+                      <button onclick="practiceEmail(${index})" class="quick-btn" style="margin: 0;">Practice This Scenario</button>
+                  </div>
+              `
+            )
+            .join("");
+
+          container.innerHTML = scenariosHTML;
+        } catch (error) {
+          console.error("Error loading email scenarios:", error);
+          alert(
+            "An error occurred while loading email scenarios. Please try again."
+          );
+        }
+      }
+
+      // Load HR questions
+      function loadHRQuestions() {
+        try {
+          const container = document.getElementById("hrQuestions");
+          if (!container) {
+            throw new Error("HR questions container not found");
+          }
+          const questionsHTML = hrQuestions
+            .map(
+              (item, index) => `
+                  <div class="question-card" onclick="toggleAnswer(${index})">
+                      <div class="question-text">${item.question}</div>
+                      <div class="question-category">${item.category}</div>
+                      <div class="answer-section" id="answer-${index}">
+                          <div style="margin-bottom: 1rem;">
+                              <strong style="color: #735BFF;">Tips:</strong>
+                              <p style="color: #ccc; margin: 0.5rem 0;">${item.tips}</p>
+                          </div>
+                          <div class="sample-answer">
+                              <strong style="color: #00E6D0;">Sample Answer:</strong>
+                              <p style="margin: 0.5rem 0; line-height: 1.5;">${item.sampleAnswer}</p>
+                          </div>
+                          <div style="margin-top: 1rem;">
+                              <strong style="color: #735BFF;">Possible Follow-up:</strong>
+                              <p style="color: #ccc; margin: 0.5rem 0; font-style: italic;">"${item.followUp}"</p>
+                          </div>
+                      </div>
+                  </div>
+              `
+            )
+            .join("");
+
+          container.innerHTML = questionsHTML;
+        } catch (error) {
+          console.error("Error loading HR questions:", error);
+          alert(
+            "An error occurred while loading HR questions. Please try again."
+          );
+        }
+      }
+
+      // Toggle HR answer visibility
+      function toggleAnswer(index) {
+        const answerSection = document.getElementById(`answer-${index}`);
+        answerSection.classList.toggle("active");
+      }
+
+      // Practice email function
+      function practiceEmail(scenarioIndex) {
+        const scenario = emailScenarios[scenarioIndex];
+        modalTitle.textContent = `Practice: ${scenario.title}`;
+
+        modalBody.innerHTML = `
+                <div class="scenario-card" style="margin-bottom: 1.5rem;">
+                    <div class="scenario-title">Scenario</div>
+                    <p style="color: #ccc; margin-bottom: 1rem;">${scenario.context}</p>
+                    <div style="background: rgba(115, 91, 255, 0.1); padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                        <strong style="color: #735BFF;">Pro Tips:</strong>
+                        <p style="color: #ccc; margin: 0.5rem 0;">${scenario.tips}</p>
+                    </div>
+                </div>
+
+                <div class="email-composer">
+                    <div class="email-field">
+                        <label for="emailSubject">Subject Line</label>
+                        <input type="text" id="emailSubject" placeholder="Enter email subject...">
+                    </div>
+                    <div class="email-field">
+                        <label for="emailBody">Email Body</label>
+                        <textarea id="emailBody" placeholder="Write your email here..." rows="10"></textarea>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button onclick="analyzeEmail(${scenarioIndex})" class="quick-btn">Get AI Feedback</button>
+                        <button onclick="showTemplate(${scenarioIndex})" class="quick-btn" style="background: rgba(115, 91, 255, 0.8);">Show Template</button>
+                    </div>
+                    <div id="emailFeedback" class="ai-feedback" style="display: none; margin-top: 1rem;"></div>
+                </div>
+            `;
+
+        modal.classList.add("active");
+      }
+
+      // Show email template
+      function showTemplate(scenarioIndex) {
+        const scenario = emailScenarios[scenarioIndex];
+        const feedbackDiv = document.getElementById("emailFeedback");
+
+        feedbackDiv.innerHTML = `
+                <div class="feedback-header">
+                    <span class="feedback-icon">📋</span>
+                    <span class="feedback-title">Professional Email Template</span>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <strong>Subject:</strong>
+                    <div style="background: #2C2C3E; padding: 0.8rem; border-radius: 4px; margin: 0.5rem 0; font-family: monospace;">${scenario.template.subject}</div>
+                    <strong>Body:</strong>
+                    <div style="background: #2C2C3E; padding: 0.8rem; border-radius: 4px; margin: 0.5rem 0; white-space: pre-line; font-family: monospace;">${scenario.template.body}</div>
+                </div>
+            `;
+
+        feedbackDiv.style.display = "block";
+      }
+
+      // Analyze email function
+      function analyzeEmail(scenarioIndex) {
+        const subject = document.getElementById("emailSubject").value;
+        const body = document.getElementById("emailBody").value;
+        const feedbackDiv = document.getElementById("emailFeedback");
+
+        if (!subject || !body) {
+          feedbackDiv.innerHTML = `
+                    <div class="feedback-header">
+                        <span class="feedback-icon">⚠️</span>
+                        <span class="feedback-title">Please complete both subject and body</span>
+                    </div>
+                `;
+          feedbackDiv.style.display = "block";
+          return;
+        }
+
+        // Simple analysis logic
+        const feedback = analyzeEmailContent(subject, body, scenarioIndex);
+
+        feedbackDiv.innerHTML = `
+                <div class="feedback-header">
+                    <span class="feedback-icon">🤖</span>
+                    <span class="feedback-title">AI Email Analysis</span>
+                </div>
+                <div style="margin-top: 1rem;">
+                    ${feedback}
+                </div>
+            `;
+
+        feedbackDiv.style.display = "block";
+      }
+
+      // Email content analysis
+      function analyzeEmailContent(subject, body, scenarioIndex) {
+        const scenario = emailScenarios[scenarioIndex];
+        let score = 0;
+        let feedback = [];
+
+        // Subject line analysis
+        if (subject.length > 5 && subject.length < 50) {
+          score += 20;
+          feedback.push("✅ Subject line length is appropriate");
+        } else {
+          feedback.push("❌ Subject line should be 5-50 characters");
+        }
+
+        if (
+          subject.includes(scenario.title.split(" ")[0].toLowerCase()) ||
+          subject.toLowerCase().includes("request") ||
+          subject.toLowerCase().includes("follow") ||
+          subject.toLowerCase().includes("meeting")
+        ) {
+          score += 15;
+          feedback.push("✅ Subject line is relevant to scenario");
+        } else {
+          feedback.push("❌ Make subject line more specific to the scenario");
+        }
+
+        // Body analysis
+        if (body.includes("Dear") || body.includes("Hi")) {
+          score += 10;
+          feedback.push("✅ Professional greeting used");
+        } else {
+          feedback.push("❌ Add a professional greeting");
+        }
+
+        if (
+          body.includes("Thank") ||
+          body.includes("please") ||
+          body.includes("Best regards")
+        ) {
+          score += 15;
+          feedback.push("✅ Polite and professional tone");
+        } else {
+          feedback.push("❌ Consider adding more courteous language");
+        }
+
+        if (body.length > 50 && body.length < 500) {
+          score += 20;
+          feedback.push("✅ Email length is appropriate");
+        } else if (body.length <= 50) {
+          feedback.push("❌ Email might be too brief - add more context");
+        } else {
+          feedback.push("❌ Email might be too long - be more concise");
+        }
+
+        // Specific scenario checks
+        if (
+          scenarioIndex === 0 &&
+          (body.toLowerCase().includes("time off") ||
+            body.toLowerCase().includes("leave"))
+        ) {
+          score += 20;
+          feedback.push("✅ Clearly states the request");
+        }
+
+        if (
+          scenarioIndex === 1 &&
+          (body.toLowerCase().includes("follow") ||
+            body.toLowerCase().includes("summary"))
+        ) {
+          score += 20;
+          feedback.push("✅ Good follow-up structure");
+        }
+
+        // Generate overall feedback
+        let overallFeedback = "";
+        if (score >= 80) {
+          overallFeedback = `<div style="color: #00E6D0; font-weight: bold; margin-bottom: 1rem;">Excellent! Score: ${score}/100</div>`;
+        } else if (score >= 60) {
+          overallFeedback = `<div style="color: #735BFF; font-weight: bold; margin-bottom: 1rem;">Good work! Score: ${score}/100</div>`;
+        } else {
+          overallFeedback = `<div style="color: #FF6B6B; font-weight: bold; margin-bottom: 1rem;">Needs improvement. Score: ${score}/100</div>`;
+        }
+
+        return (
+          overallFeedback +
+          feedback
+            .map((item) => `<div style="margin: 0.5rem 0;">${item}</div>`)
+            .join("")
+        );
+      }
+
+      // Handle quick actions
+      function handleQuickAction(action) {
+        switch (action) {
+          case "email-practice":
+            showView("email-practice");
+            loadEmailScenarios();
+            break;
+          case "hr-prep":
+            showView("hr-interview");
+            loadHRQuestions();
+            break;
+          case "daily-challenge":
+            showDailyChallenge();
+            break;
+          case "progress-report":
+            showProgressReport();
+        }
+      }
+
+      // Initial view load
+      document.addEventListener("DOMContentLoaded", () => {
+        showView("dashboard");
+      });
+
+      // Placeholder functions for quick actions (you can expand these)
+      function showDailyChallenge() {
+        modalTitle.textContent = "Daily Challenge";
+        modalBody.innerHTML = `
+                <p style="color: #ccc;">Today's challenge: Practice giving constructive feedback to a peer. Think about the STAR method (Situation, Task, Action, Result) for structuring your feedback.</p>
+                <button class="quick-btn" style="margin-top: 1rem;">Start Challenge</button>
+            `;
+        modal.classList.add("active");
+      }
+
+      function showProgressReport() {
+        modalTitle.textContent = "Your Progress Report";
+        modalBody.innerHTML = `
+                <div class="quick-stats" style="border: none; padding: 0;">
+                    <div class="stat-item">
+                        <span>Total Lessons Completed</span>
+                        <span class="stat-value">12 / 29</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Email Practice Sessions</span>
+                        <span class="stat-value">15</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>HR Interview Questions Reviewed</span>
+                        <span class="stat-value">8 / 10</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Current Streak</span>
+                        <span class="stat-value">7 days</span>
+                    </div>
+                </div>
+                <p style="color: #ccc; margin-top: 1.5rem;">Keep up the great work! Consistency is key to mastering soft skills.</p>
+            `;
+        modal.classList.add("active");
+      }
+
+      function startCourse(courseTitle) {
+        alert(`Starting course: ${courseTitle}!`);
+        modal.classList.remove("active");
+        // In a real application, this would navigate to the course content
+      }
+    </script>
+  </body>
+</html>

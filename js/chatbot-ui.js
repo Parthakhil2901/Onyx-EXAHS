@@ -21,31 +21,37 @@ document.addEventListener("DOMContentLoaded", () => {
     displayBotMessage("Chat cleared. How can I assist you?");
   });
 
-  function sendMessage() {
+  async function sendMessage() {
     const userMsg = chatInput.value.trim();
     if (!userMsg) return;
     displayUserMessage(userMsg);
     chatInput.value = "";
     chatWindow.scrollTop = chatWindow.scrollHeight;
 
-    // Call Gemini API backend
-    fetch("/api/gemini-chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userMsg }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        displayBotMessage(
-          data.reply || "Sorry, I couldn't understand. Please try again."
-        );
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-      })
-      .catch(() => {
-        displayBotMessage(
-          "⚠️ There was a problem connecting to the bot. Please try again."
-        );
+    try {
+      const res = await fetch("/api/gemini-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMsg }),
       });
+      if (!res.ok) throw new Error("Network response was not ok");
+      const data = await res.json();
+      displayBotMessage(
+        data.reply || "Sorry, I couldn't understand. Please try again."
+      );
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      // Check if screening is complete based on bot reply or userMsg
+      // Removed screeningComplete check and modal for now as per user request
+      // if (data.screeningComplete) {
+      //   // Show success modal
+      //   showSuccessModal();
+      // }
+    } catch (error) {
+      displayBotMessage(
+        "⚠️ There was a problem connecting to the bot. Please try again."
+      );
+    }
   }
 
   function displayBotMessage(message) {
@@ -66,5 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
     bubble.textContent = message;
     msgDiv.appendChild(bubble);
     chatWindow.appendChild(msgDiv);
+  }
+
+  function showSuccessModal() {
+    const modalOverlay = document.querySelector(".modal-overlay");
+    const successModal = document.querySelector(".success-modal");
+    modalOverlay.style.display = "block";
+    successModal.style.display = "block";
+
+    const goToDashboardBtn = successModal.querySelector("button");
+    goToDashboardBtn.addEventListener("click", () => {
+      // Redirect to dashboard with personalized roadmap
+      window.location.href = "dashboard.html?personalizedRoadmap=true";
+    });
   }
 });
